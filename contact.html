@@ -1,0 +1,190 @@
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-heading">
+      <span class="contact-tag">GET IN TOUCH</span>
+      <h2>Let's <span>Connect</span></h2>
+      <p>Have a question, feedback, or collaboration idea? Feel free to connect with me.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <a class="contact-card email" href="mailto:abdulahaduy12@gmail.com">
+        <div class="contact-icon">✉</div>
+        <div>
+          <h3>Email</h3>
+          <p>abdulahaduy12@gmail.com</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-card facebook" href="https://www.facebook.com/abdul.ahad.252" target="_blank" rel="noopener noreferrer">
+        <div class="contact-icon">f</div>
+        <div>
+          <h3>Facebook</h3>
+          <p>Visit my Facebook profile</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-card github" href="https://github.com/abdulahadcst" target="_blank" rel="noopener noreferrer">
+        <div class="contact-icon">⌘</div>
+        <div>
+          <h3>GitHub</h3>
+          <p>Explore my projects</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-card telegram" href="https://t.me/moneyispowers14" target="_blank" rel="noopener noreferrer">
+        <div class="contact-icon">➤</div>
+        <div>
+          <h3>Telegram</h3>
+          <p>@moneyispowers14</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <div class="contact-card linkedin coming-soon">
+        <div class="contact-icon">in</div>
+        <div>
+          <h3>LinkedIn</h3>
+          <p>Coming Soon</p>
+        </div>
+        <span class="coming-label">SOON</span>
+      </div>
+
+    </div>
+
+    <div class="contact-bottom">
+      <h3>Have something in mind?</h3>
+      <p>Let's discuss your ideas, projects, or collaboration opportunities.</p>
+      <a href="mailto:abdulahaduy12@gmail.com" class="contact-button">
+        Contact Me <span>↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.contact-section {
+  padding: 100px 20px;
+  background: linear-gradient(180deg, #0b1020, #10172b);
+  color: #fff;
+}
+.contact-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 48px;
+}
+.contact-tag {
+  color: #8b9cff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+.contact-heading h2 {
+  font-size: clamp(36px, 6vw, 54px);
+  margin: 14px 0;
+}
+.contact-heading h2 span {
+  background: linear-gradient(90deg, #6685ff, #bd78ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.contact-heading p, .contact-bottom p {
+  color: #aab3c8;
+  line-height: 1.8;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin: auto;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 23px;
+  border: 1px solid #29344d;
+  border-radius: 18px;
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  text-decoration: none;
+  transition: .25s ease;
+}
+a.contact-card:hover {
+  transform: translateY(-6px);
+  border-color: #8293ff;
+  background: rgba(115,130,255,.12);
+}
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #28365d;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 800;
+}
+.contact-card h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+.contact-card p {
+  margin: 0;
+  color: #aab3c8;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.contact-arrow {
+  margin-left: auto;
+  color: #aab3c8;
+  font-size: 20px;
+}
+.coming-label {
+  margin-left: auto;
+  color: #aab3c8;
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid #48536c;
+  border-radius: 20px;
+  padding: 6px 9px;
+}
+.contact-bottom {
+  max-width: 700px;
+  margin: 55px auto 0;
+  padding: 38px 20px;
+  text-align: center;
+  border: 1px solid #34436b;
+  border-radius: 22px;
+  background: linear-gradient(120deg, rgba(75,100,220,.17), rgba(153,85,220,.13));
+}
+.contact-bottom h3 {
+  font-size: 25px;
+  margin: 0 0 10px;
+}
+.contact-button {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 13px 25px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #5578ff, #9664ed);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+.contact-button:hover { opacity: .88; }
+
+@media (max-width: 600px) {
+  .contact-section { padding: 70px 15px; }
+  .contact-card { padding: 18px; }
+}
+</style>
