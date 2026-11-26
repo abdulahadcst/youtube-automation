@@ -1,13 +1,925 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YouTube Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YouTube Automation — AI-Powered YouTube Studio</title>
+<meta name="description" content="YouTube Automation is an AI-powered desktop studio for YouTube research, content creation, video production, SEO, channel management and analytics.">
+<meta name="theme-color" content="#090d19">
+
+<style>
+:root {
+    --bg: #090d19;
+    --panel: #11182a;
+    --panel2: #151e33;
+    --text: #f4f6ff;
+    --muted: #9aa8c2;
+    --blue: #5487ff;
+    --purple: #9565ff;
+    --border: rgba(255,255,255,.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button { font: inherit; }
+
+.container {
+    width: min(1160px, 90%);
+    margin: auto;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(9,13,25,.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.logo {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg,var(--blue),var(--purple));
+    font-size: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 27px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.nav-links a:hover { color: white; }
+
+.nav-button {
+    background: linear-gradient(120deg,var(--blue),var(--purple));
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 9px;
+}
+
+.menu-btn {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 90px;
+    text-align: center;
+}
+
+.hero:before {
+    content: "";
+    position: absolute;
+    width: 650px;
+    height: 450px;
+    background: #4c65ff;
+    opacity: .15;
+    filter: blur(130px);
+    border-radius: 50%;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    max-width: 850px;
+    margin: auto;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: rgba(84,135,255,.12);
+    border: 1px solid rgba(84,135,255,.3);
+    color: #a9c4ff;
+    border-radius: 30px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(38px,6vw,69px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+}
+
+.gradient-text {
+    background: linear-gradient(100deg,#66a4ff,#b28aff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 690px;
+    margin: 0 auto 32px;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 23px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.btn:hover { transform: translateY(-3px); }
+
+.primary {
+    background: linear-gradient(120deg,var(--blue),var(--purple));
+    color: white;
+}
+
+.secondary {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+}
+
+.hero-note {
+    margin-top: 20px;
+    color: #75839d;
+    font-size: 12px;
+}
+
+.preview {
+    margin: 65px auto 0;
+    max-width: 950px;
+    background: #11182a;
+    border: 1px solid rgba(133,158,255,.25);
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 30px 100px rgba(45,80,200,.17);
+}
+
+.preview-top {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 10px 15px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 15px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #52617e;
+}
+
+.preview-title {
+    color: #aab8d2;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 15px;
+    min-height: 270px;
+}
+
+.dash-sidebar {
+    background: #0c1221;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.dash-item {
+    padding: 9px;
+    color: #9baac5;
+    font-size: 12px;
+    margin: 5px 0;
+    border-radius: 7px;
+}
+
+.dash-item.active {
+    background: #24365e;
+    color: #fff;
+}
+
+.dash-main { padding: 10px; }
+
+.dash-main h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.dash-main p {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.stat {
+    background: #19243b;
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.stat small {
+    color: #8fa0bd;
+    font-size: 10px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.fake-chart {
+    margin-top: 14px;
+    height: 80px;
+    border-radius: 9px;
+    background:
+      linear-gradient(160deg,transparent 48%,rgba(84,135,255,.35) 49%,transparent 51%),
+      linear-gradient(180deg,#1a2c4e,#121b2d);
+    border: 1px solid var(--border);
+}
+
+section { padding: 85px 0; }
+
+.section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 45px;
+}
+
+.section-heading span {
+    color: #9c8aff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    font-size: clamp(29px,4vw,43px);
+    margin: 12px 0;
+    line-height: 1.2;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.feature {
+    padding: 26px;
+    background: linear-gradient(145deg,#151e33,#101728);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: .25s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: rgba(110,145,255,.5);
+}
+
+.feature-icon {
+    width: 47px;
+    height: 47px;
+    display: grid;
+    place-items: center;
+    background: rgba(93,124,255,.14);
+    border-radius: 12px;
+    font-size: 23px;
+    margin-bottom: 19px;
+}
+
+.feature h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.workflow {
+    background: #0e1525;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.step {
+    background: var(--panel);
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.step-number {
+    color: #a58cff;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.step h3 {
+    margin: 12px 0 7px;
+    font-size: 16px;
+}
+
+.step p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.info-card {
+    background: var(--panel);
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.info-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.info-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.faq {
+    max-width: 800px;
+    margin: auto;
+}
+
+details {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+details p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.cta {
+    text-align: center;
+    padding: 65px 25px;
+    background: linear-gradient(120deg,#192b50,#252047);
+    border: 1px solid rgba(150,140,255,.2);
+    border-radius: 20px;
+}
+
+.cta h2 {
+    font-size: clamp(27px,4vw,39px);
+    margin-bottom: 12px;
+}
+
+.cta p {
+    color: #c1cbe0;
+    margin-bottom: 23px;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 35px 0;
+    margin-top: 75px;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.footer-links a:hover { color: white; }
+
+.copyright {
+    color: #71809a;
+    font-size: 12px;
+    margin-top: 22px;
+}
+
+@media(max-width:850px) {
+    .features { grid-template-columns: repeat(2,1fr); }
+    .steps { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:650px) {
+    .menu-btn { display: block; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 22px 5%;
+        background: #101827;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 17px;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .features,
+    .steps,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard { grid-template-columns: 1fr; }
+    .dash-sidebar { display: none; }
+
+    .stats { grid-template-columns: 1fr 1fr; }
+
+    .hero { padding: 75px 0 55px; }
+    section { padding: 65px 0; }
+    .hero h1 { letter-spacing: -1px; }
+}
+</style>
 </head>
+
 <body>
-<h1>YouTube Automation</h1>
-<p>AI-powered desktop software for YouTube content creation and channel analytics.</p>
-<p>Contact: abdulahaduy12@gmail.com</p>
+
+<nav>
+<div class="container nav-inner">
+
+<a href="#" class="brand">
+    <span class="logo">▶</span>
+    <span>YouTube Automation</span>
+</a>
+
+<button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+
+<div class="nav-links" id="navLinks">
+    <a href="#features">Features</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="mailto:abdulahaduy12@gmail.com" class="nav-button">Contact Us</a>
+</div>
+
+</div>
+</nav>
+
+<main>
+
+<section class="hero">
+<div class="container hero-content">
+
+<div class="eyebrow">✦ AI-POWERED YOUTUBE WORKFLOW</div>
+
+<h1>
+Your YouTube Workflow.<br>
+<span class="gradient-text">Powered by AI.</span>
+</h1>
+
+<p>
+Research ideas, write scripts, generate voiceovers,
+create videos, optimize SEO and manage your YouTube
+channels — all from one desktop application.
+</p>
+
+<div class="hero-actions">
+    <a href="#features" class="btn primary">Explore Features →</a>
+    <a href="#about" class="btn secondary">Discover the Software</a>
+</div>
+
+<div class="hero-note">
+Desktop application · AI-assisted content creation · YouTube API integration
+</div>
+
+<div class="preview">
+
+<div class="preview-top">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="preview-title">YouTube Automation — Dashboard Preview</span>
+</div>
+
+<div class="dashboard">
+
+<div class="dash-sidebar">
+    <div class="dash-item active">▦ Dashboard</div>
+    <div class="dash-item">◉ Channels</div>
+    <div class="dash-item">✦ AI Agents</div>
+    <div class="dash-item">▣ Projects</div>
+    <div class="dash-item">◷ Analytics</div>
+    <div class="dash-item">⚙ Settings</div>
+</div>
+
+<div class="dash-main">
+    <h3>Content Studio</h3>
+    <p>Manage your YouTube content workflow from one place.</p>
+
+    <div class="stats">
+        <div class="stat">
+            <small>CONTENT WORKFLOW</small>
+            <strong>AI Studio</strong>
+        </div>
+        <div class="stat">
+            <small>CHANNELS</small>
+            <strong>Multi-Channel</strong>
+        </div>
+        <div class="stat">
+            <small>PRODUCTION</small>
+            <strong>Video Studio</strong>
+        </div>
+    </div>
+
+    <div class="fake-chart"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+
+<div class="section-heading">
+    <span>Powerful Capabilities</span>
+    <h2>Everything for Your YouTube Workflow</h2>
+    <p>
+        A collection of AI-assisted tools designed to support
+        research, production, publishing and channel management.
+    </p>
+</div>
+
+<div class="features">
+
+<div class="feature">
+    <div class="feature-icon">◉</div>
+    <h3>Multi-Channel Management</h3>
+    <p>Connect and manage multiple authorized YouTube channels using Google OAuth.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">⌕</div>
+    <h3>YouTube Research</h3>
+    <p>Explore topics, content ideas, niches, keywords and publicly available video information.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">✦</div>
+    <h3>AI Script Generation</h3>
+    <p>Generate video ideas, outlines, hooks, scripts, titles and descriptions with AI assistance.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">♫</div>
+    <h3>AI Voiceover</h3>
+    <p>Turn scripts into narration using available voice generation providers and supported languages.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">▣</div>
+    <h3>Video Production</h3>
+    <p>Assemble scenes, visuals, subtitles, narration and other media into video projects.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">▧</div>
+    <h3>Thumbnail Studio</h3>
+    <p>Create and prepare custom thumbnail designs for your YouTube videos.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">⌁</div>
+    <h3>YouTube SEO</h3>
+    <p>Get assistance with titles, descriptions, tags, keywords and hashtags.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">⇧</div>
+    <h3>Video Publishing</h3>
+    <p>Upload videos and manage supported publishing settings after authorization.</p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">▤</div>
+    <h3>Analytics & Insights</h3>
+    <p>Review available channel and video analytics to understand content performance.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="workflow" id="workflow">
+<div class="container">
+
+<div class="section-heading">
+    <span>Simple Workflow</span>
+    <h2>From Idea to Published Video</h2>
+    <p>Organize your content production process in a structured workflow.</p>
+</div>
+
+<div class="steps">
+
+<div class="step">
+    <span class="step-number">STEP 01</span>
+    <h3>Connect Channels</h3>
+    <p>Authorize your YouTube channels using Google's official sign-in process.</p>
+</div>
+
+<div class="step">
+    <span class="step-number">STEP 02</span>
+    <h3>Research & Create</h3>
+    <p>Research topics and prepare scripts and content ideas with AI assistance.</p>
+</div>
+
+<div class="step">
+    <span class="step-number">STEP 03</span>
+    <h3>Produce Videos</h3>
+    <p>Generate narration, assemble visuals, edit scenes and prepare thumbnails.</p>
+</div>
+
+<div class="step">
+    <span class="step-number">STEP 04</span>
+    <h3>Review & Publish</h3>
+    <p>Review your video, approve publishing settings and upload when authorized.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+
+<div class="section-heading">
+    <span>About The Application</span>
+    <h2>One Desktop Studio for Your Workflow</h2>
+    <p>
+        YouTube Automation brings multiple content creation
+        and channel management tools together in one desktop application.
+    </p>
+</div>
+
+<div class="info-grid">
+
+<div class="info-card">
+    <h3>Built for Content Creators</h3>
+    <p>
+        The application is designed to help creators organize
+        research, scripting, narration, video production,
+        metadata preparation and publishing workflows.
+    </p>
+</div>
+
+<div class="info-card">
+    <h3>AI & Third-Party Integrations</h3>
+    <p>
+        Supported AI providers and YouTube API Services can
+        power selected features. Availability may depend on
+        API permissions, provider limits, configuration and usage costs.
+    </p>
+</div>
+
+<div class="info-card">
+    <h3>Creator Control</h3>
+    <p>
+        Users remain responsible for reviewing generated content,
+        choosing publishing settings and authorizing actions
+        on their connected YouTube channels.
+    </p>
+</div>
+
+<div class="info-card">
+    <h3>Platform Compliance</h3>
+    <p>
+        Users must follow YouTube policies, copyright requirements,
+        applicable laws and the terms of third-party services.
+    </p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="faq">
+<div class="container">
+
+<div class="section-heading">
+    <span>Frequently Asked Questions</span>
+    <h2>Questions About the Software</h2>
+</div>
+
+<div class="faq">
+
+<details>
+    <summary>Is YouTube Automation a website or desktop software?</summary>
+    <p>YouTube Automation is a desktop application. This website provides information about the software and its policies.</p>
+</details>
+
+<details>
+    <summary>How do I connect my YouTube channel?</summary>
+    <p>Users can connect an authorized YouTube channel through Google's official OAuth sign-in process, subject to application access and approval.</p>
+</details>
+
+<details>
+    <summary>Can I manage multiple YouTube channels?</summary>
+    <p>The application is designed to support multiple authorized channels. Actual availability depends on the configured application features and permissions.</p>
+</details>
+
+<details>
+    <summary>Does AI automatically publish every video?</summary>
+    <p>AI-assisted content creation and publishing workflows may be available. Users should review content and authorize publishing actions.</p>
+</details>
+
+<details>
+    <summary>Are third-party AI services free?</summary>
+    <p>Not necessarily. AI providers may apply usage limits, subscription fees or API charges. Check provider pricing before using paid services.</p>
+</details>
+
+<details>
+    <summary>How can I read the Privacy Policy?</summary>
+    <p>Visit our <a href="privacy.html">Privacy Policy</a> page for information about data access, usage and deletion.</p>
+</details>
+
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="cta">
+    <h2>Build Your Next YouTube Workflow</h2>
+    <p>
+        Explore an AI-assisted approach to YouTube research,
+        content creation and video production.
+    </p>
+    <a href="mailto:abdulahaduy12@gmail.com" class="btn primary">
+        Contact the Developer →
+    </a>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+
+<div class="footer-inner">
+
+<a href="#" class="brand">
+    <span class="logo">▶</span>
+    <span>YouTube Automation</span>
+</a>
+
+<div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="mailto:abdulahaduy12@gmail.com">Contact</a>
+</div>
+
+</div>
+
+<p class="copyright">
+© 2026 YouTube Automation. All rights reserved.
+<br>
+YouTube is a trademark of Google LLC. This application is not affiliated with or endorsed by YouTube or Google.
+</p>
+
+</div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+    });
+});
+</script>
+
 </body>
 </html>
